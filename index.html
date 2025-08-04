@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wanderlust Travel - Explore the World</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #34495e;
+            --success: #2ecc71;
+        }
+
+        body {
+            background-color: #f8f9fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        nav ul li a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-icon {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1503220317375-aaad61436b1b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding-top: 80px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 30px;
+            animation: fadeInUp 1.2s ease;
+        }
+
+        .search-form {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--dark);
+            font-weight: 600;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        .section-title p {
+            color: #777;
+            max-width: 700px;
+            margin: 20px auto 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--secondary);
+            transform: translateX(-100%);
+            transition: transform 0.5s ease;
+        }
+
+        .feature-card:hover::before {
+            transform: translateX(0);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-card i {
+            font-size: 3rem;
+            color: var(--secondary);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover i {
+            transform: scale(1.1);
+            color: var(--accent);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Destinations Section */
+        .destinations {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .filter-btn.active,
+        .filter-btn:hover {
+            background: var(--secondary);
+            color: white;
+            border-color: var(--secondary);
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .destination-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .destination-card.hidden {
+            opacity: 0;
+            transform: scale(0.8);
+            height: 0;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .destination-img {
+            height: 200px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .destination-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .destination-card:hover .destination-img img {
+            transform: scale(1.1);
+        }
+
+        .destination-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--accent);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .destination-info {
+            padding: 20px;
+        }
+
+        .destination-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .destination-info p {
+            color: #777;
+            margin-bottom: 15px;
+        }
+
+        .destination-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .rating {
+            color: #f39c12;
+        }
+
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .testimonials-slider {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .testimonial-card {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 30px;
+            position: relative;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .testimonial-card.active {
+            display: block;
+        }
+
+        .testimonial-card::before {
+            content: '\f10d';
+            font-family: 'Font Awesome 5 Free';
+            font-weight: 900;
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            font-size: 2rem;
+            color: var(--secondary);
+            opacity: 0.2;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+
+        .author-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+            overflow: hidden;
+        }
+
+        .author-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin-bottom: 5px;
+            color: var(--primary);
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 0.9rem;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .slider-btn {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .slider-btn:hover {
+            background: var(--primary);
+        }
+
+        /* Booking Section */
+        .booking {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+        }
+
+        .booking h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .booking p {
+            max-width: 700px;
+            margin: 0 auto 40px;
+            font-size: 1.1rem;
+        }
+
+        .booking-form {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 70px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+
+        .footer-col h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        .footer-col p {
+            margin-bottom: 20px;
+            color: #bbb;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            color: white;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Scroll to Top Button */
+        .scroll-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--accent);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .scroll-to-top:hover {
+            background: #c0392b;
+            transform: translateY(-5px);
+        }
+
+        /* Notification Toast */
+        .notification {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: white;
+            color: var(--dark);
+            padding: 15px 25px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: translateX(150%);
+            transition: transform 0.5s ease;
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 350px;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        .notification i {
+            font-size: 1.5rem;
+        }
+
+        .notification.success i {
+            color: var(--success);
+        }
+
+        .notification.error i {
+            color: var(--accent);
+        }
+
+        .notification-content {
+            flex: 1;
+        }
+
+        .notification-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .notification-message {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .notification-close {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: #999;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            .mobile-menu-icon {
+                display: block;
+                position: absolute;
+                top: 20px;
+                right: 20px;
+            }
+            
+            nav {
+                display: none;
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
+            }
+            
+            nav.active {
+                display: block;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                padding: 10px 0;
+            }
+            
+            nav ul li {
+                margin: 10px 0;
+            }
+            
+            .hero {
+                padding-top: 120px;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .form-row {
+                flex-direction: column;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .search-form {
+                flex-direction: column;
+            }
+            
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-globe-americas"></i>
+                Wanderlust Travel
+            </div>
+            <div class="mobile-menu-icon">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#destinations">Destinations</a></li>
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#testimonials">Reviews</a></li>
+                    <li><a href="#booking">Book Now</a></li>
+                    <li><a href="#" class="btn">Contact Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Explore the World with Us</h1>
+            <p>Discover amazing destinations, create unforgettable memories, and embark on the journey of a lifetime with Wanderlust Travel.</p>
+            
+            <div class="search-box">
+                <form class="search-form" id="searchForm">
+                    <div class="form-group">
+                        <label for="destination">Destination</label>
+                        <input type="text" id="destination" class="form-control" placeholder="Where to?" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkin">Check-in</label>
+                        <input type="date" id="checkin" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="checkout">Check-out</label>
+                        <input type="date" id="checkout" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="travelers">Travelers</label>
+                        <select id="travelers" class="form-control" required>
+                            <option value="">Select</option>
+                            <option value="1">1 Traveler</option>
+                            <option value="2">2 Travelers</option>
+                            <option value="3">3 Travelers</option>
+                            <option value="4+">4+ Travelers</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <button type="submit" class="btn" style="width: 100%;">Search</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>Why Travel With Us</h2>
+                <p>We provide exceptional travel experiences with our unique features and dedicated service</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <h3>Expert Planning</h3>
+                    <p>Our travel experts create personalized itineraries based on your preferences and interests.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Safe Travel</h3>
+                    <p>Your safety is our priority. We ensure all accommodations and transportation meet high safety standards.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-dollar-sign"></i>
+                    <h3>Best Prices</h3>
+                    <p>We offer competitive prices without compromising on quality. Get the best value for your money.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-headset"></i>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated support team is available round the clock to assist you during your journey.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Luxury Stays</h3>
+                    <p>Experience comfort and luxury with our handpicked accommodations worldwide.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-utensils"></i>
+                    <h3>Local Experiences</h3>
+                    <p>Immerse yourself in local culture with authentic experiences and culinary delights.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Destinations Section -->
+    <section id="destinations" class="destinations">
+        <div class="container">
+            <div class="section-title">
+                <h2>Popular Destinations</h2>
+                <p>Explore our handpicked selection of the world's most breathtaking destinations</p>
+            </div>
+            
+            <div class="filter-container">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="beach">Beach</button>
+                <button class="filter-btn" data-filter="city">City</button>
+                <button class="filter-btn" data-filter="mountain">Mountain</button>
+                <button class="filter-btn" data-filter="cultural">Cultural</button>
+            </div>
+            
+            <div class="destinations-grid">
+                <div class="destination-card" data-category="beach">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1543429776-2782fcf7c696?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Bali">
+                        <div class="destination-badge">Beach</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Bali, Indonesia</h3>
+                        <p>Experience the tropical paradise with stunning beaches, vibrant culture, and lush landscapes.</p>
+                        <div class="destination-meta">
+                            <div class="price">$899</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.5
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="city">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1519452635265-7b1fbfd1e4e0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Paris">
+                        <div class="destination-badge">City</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Paris, France</h3>
+                        <p>The city of lights awaits with iconic landmarks, world-class cuisine, and romantic ambiance.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,299</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                5.0
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="beach">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Santorini">
+                        <div class="destination-badge">Beach</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Santorini, Greece</h3>
+                        <p>Whitewashed buildings, blue-domed churches, and breathtaking sunsets over the Aegean Sea.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,599</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.7
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="city">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1552465011-b4e21bf6e79a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Tokyo">
+                        <div class="destination-badge">City</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Tokyo, Japan</h3>
+                        <p>A fascinating blend of ancient traditions and cutting-edge technology in a vibrant metropolis.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,799</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                4.9
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="cultural">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Dubai">
+                        <div class="destination-badge">Cultural</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Dubai, UAE</h3>
+                        <p>Experience luxury, innovation, and Arabian hospitality in this modern desert oasis.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,399</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                                4.2
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="city">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="New York">
+                        <div class="destination-badge">City</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>New York, USA</h3>
+                        <p>The city that never sleeps offers iconic landmarks, world-class museums, and diverse culture.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,099</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="mountain">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1464822759844-d150baec0494?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Swiss Alps">
+                        <div class="destination-badge">Mountain</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Swiss Alps, Switzerland</h3>
+                        <p>Breathtaking mountain landscapes, pristine ski slopes, and charming alpine villages.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,999</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.8
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="cultural">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1564507592333-c60657eea523?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Rome">
+                        <div class="destination-badge">Cultural</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Rome, Italy</h3>
+                        <p>Walk through history in the Eternal City with ancient ruins, Renaissance art, and delicious cuisine.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,199</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.7
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="destination-card" data-category="mountain">
+                    <div class="destination-img">
+                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Banff">
+                        <div class="destination-badge">Mountain</div>
+                    </div>
+                    <div class="destination-info">
+                        <h3>Banff, Canada</h3>
+                        <p>Stunning Rocky Mountain scenery, turquoise lakes, and abundant wildlife in Canada's first national park.</p>
+                        <div class="destination-meta">
+                            <div class="price">$1,499</div>
+                            <div class="rating">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                4.6
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>What Our Travelers Say</h2>
+                <p>Read testimonials from our satisfied customers who have experienced our exceptional service</p>
+            </div>
+            
+            <div class="testimonials-slider">
+                <div class="testimonial-card active">
+                    <p class="testimonial-text">"Wanderlust Travel made our honeymoon unforgettable! Every detail was perfectly planned, and we felt like royalty throughout our trip to Bali."</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Johnson">
+                        </div>
+                        <div class="author-info">
+                            <h4>Sarah Johnson</h4>
+                            <p>Honeymoon in Bali</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The family vacation to Paris was magical! The kids loved the itinerary, and we appreciated the kid-friendly activities arranged by Wanderlust."</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Michael Chen">
+                        </div>
+                        <div class="author-info">
+                            <h4>Michael Chen</h4>
+                            <p>Family Trip to Paris</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"As a solo traveler, safety and comfort were my top priorities. Wanderlust delivered both on my adventure through Japan. Highly recommended!"</p>
+                    <div class="testimonial-author">
+                        <div class="author-img">
+                            <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Emma Rodriguez">
+                        </div>
+                        <div class="author-info">
+                            <h4>Emma Rodriguez</h4>
+                            <p>Solo Trip to Japan</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="slider-controls">
+                <button class="slider-btn prev-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="slider-btn next-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="booking">
+        <div class="container">
+            <h2>Book Your Dream Vacation</h2>
+            <p>Fill out the form below and our travel experts will create a personalized itinerary just for you</p>
+            
+            <form class="booking-form" id="bookingForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" class="form-control" placeholder="Your Email" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="Your Phone">
+                    </div>
+                    <div class="form-group">
+                        <label for="destination-booking">Preferred Destination</label>
+                        <select id="destination-booking" class="form-control" required>
+                            <option value="">Select a destination</option>
+                            <option value="bali">Bali, Indonesia</option>
+                            <option value="paris">Paris, France</option>
+                            <option value="santorini">Santorini, Greece</option>
+                            <option value="tokyo">Tokyo, Japan</option>
+                            <option value="dubai">Dubai, UAE</option>
+                            <option value="newyork">New York, USA</option>
+                            <option value="swiss">Swiss Alps, Switzerland</option>
+                            <option value="rome">Rome, Italy</option>
+                            <option value="banff">Banff, Canada</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="travel-date">Travel Date</label>
+                        <input type="date" id="travel-date" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="duration">Duration</label>
+                        <select id="duration" class="form-control" required>
+                            <option value="">Select duration</option>
+                            <option value="3-5">3-5 Days</option>
+                            <option value="6-8">6-8 Days</option>
+                            <option value="9-12">9-12 Days</option>
+                            <option value="13+">13+ Days</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Special Requests</label>
+                    <textarea id="message" class="form-control" rows="4" placeholder="Tell us about your travel preferences, special occasions, or any specific requirements..."></textarea>
+                </div>
+                
+                <button type="submit" class="btn" style="width: 100%; margin-top: 20px;">Request Booking</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Wanderlust Travel</h3>
+                    <p>Creating unforgettable travel experiences since 2010. We're passionate about helping you explore the world safely and comfortably.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#destinations">Destinations</a></li>
+                        <li><a href="#features">Features</a></li>
+                        <li><a href="#testimonials">Reviews</a></li>
+                        <li><a href="#booking">Book Now</a></li>
+                        <li><a href="#">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Popular Destinations</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Bali, Indonesia</a></li>
+                        <li><a href="#">Paris, France</a></li>
+                        <li><a href="#">Santorini, Greece</a></li>
+                        <li><a href="#">Tokyo, Japan</a></li>
+                        <li><a href="#">Dubai, UAE</a></li>
+                        <li><a href="#">New York, USA</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, Adventure City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@wanderlusttravel.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9am-6pm</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; <span id="currentYear"></span> Wanderlust Travel. All rights reserved. | Designed with <i class="fas fa-heart" style="color: var(--accent);"></i> by Travel Experts</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollToTop" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Notification Toast -->
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <div class="notification-content">
+            <div class="notification-title">Success!</div>
+            <div class="notification-message">Your message has been sent successfully.</div>
+        </div>
+        <button class="notification-close">&times;</button>
+    </div>
+
+    <script>
+        // Set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Mobile menu toggle
+        const mobileMenuIcon = document.querySelector('.mobile-menu-icon');
+        const nav = document.querySelector('nav');
+        
+        mobileMenuIcon.addEventListener('click', () => {
+            nav.classList.toggle('active');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu if open
+                    nav.classList.remove('active');
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'linear-gradient(135deg, rgba(44, 62, 80, 0.95), rgba(52, 152, 219, 0.95))';
+                header.style.backdropFilter = 'blur(10px)';
+                header.style.boxShadow = '0 5px 20px rgba(0,0,0,0.2)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, var(--primary), var(--secondary))';
+                header.style.backdropFilter = 'none';
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+
+        // Testimonial slider
+        const testimonialCards = document.querySelectorAll('.testimonial-card');
+        const prevBtn = document.querySelector('.prev-btn');
+        const nextBtn = document.querySelector('.next-btn');
+        let currentTestimonial = 0;
+
+        function showTestimonial(index) {
+            testimonialCards.forEach(card => card.classList.remove('active'));
+            testimonialCards[index].classList.add('active');
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        });
+
+        // Auto-slide testimonials every 5 seconds
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
+            showTestimonial(currentTestimonial);
+        }, 5000);
+
+        // Destination filtering
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const destinationCards = document.querySelectorAll('.destination-card');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                
+                // Filter destinations
+                destinationCards.forEach(card => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.classList.remove('hidden');
+                    } else {
+                        card.classList.add('hidden');
+                    }
+                });
+            });
+        });
+
+        // Form submission handling with validation
+        const searchForm = document.getElementById('searchForm');
+        const bookingForm = document.getElementById('bookingForm');
+        const notification = document.getElementById('notification');
+        const notificationClose = document.querySelector('.notification-close');
+
+        // Show notification function
+        function showNotification(title, message, type = 'success') {
+            const notificationEl = document.getElementById('notification');
+            const icon = notificationEl.querySelector('i');
+            const titleEl = notificationEl.querySelector('.notification-title');
+            const messageEl = notificationEl.querySelector('.notification-message');
+            
+            // Update notification content
+            titleEl.textContent = title;
+            messageEl.textContent = message;
+            
+            // Update notification class
+            notificationEl.className = 'notification show';
+            if (type === 'error') {
+                notificationEl.classList.add('error');
+                icon.className = 'fas fa-exclamation-circle';
+            } else {
+                notificationEl.classList.add('success');
+                icon.className = 'fas fa-check-circle';
+            }
+            
+            // Hide notification after 5 seconds
+            setTimeout(() => {
+                notificationEl.classList.remove('show');
+            }, 5000);
+        }
+
+        // Close notification
+        notificationClose.addEventListener('click', () => {
+            notification.classList.remove('show');
+        });
+
+        // Search form submission
+        searchForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const destination = document.getElementById('destination').value;
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const travelers = document.getElementById('travelers').value;
+            
+            // Validate dates
+            if (new Date(checkout) <= new Date(checkin)) {
+                showNotification('Invalid Dates', 'Check-out date must be after check-in date.', 'error');
+                return;
+            }
+            
+            // Show success notification
+            showNotification('Search Initiated', `Searching for trips to ${destination} from ${checkin} to ${checkout} for ${travelers}.`);
+            
+            // In a real application, this would submit the form to a server
+            // For demo purposes, we'll just reset the form
+            setTimeout(() => {
+                searchForm.reset();
+            }, 1000);
+        });
+
+        // Booking form submission
+        bookingForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const destination = document.getElementById('destination-booking').value;
+            
+            // Show success notification
+            showNotification('Booking Requested', `Thank you, ${name}! Your booking request for ${destination} has been received. We'll contact you at ${email} shortly.`);
+            
+            // Reset form
+            setTimeout(() => {
+                bookingForm.reset();
+            }, 1000);
+        });
+
+        // Scroll to top button
+        const scrollToTopBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.style.display = 'flex';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Set minimum date for date inputs to today
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').setAttribute('min', today);
+        document.getElementById('checkout').setAttribute('min', today);
+        document.getElementById('travel-date').setAttribute('min', today);
+
+        // Update checkout minimum date when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            checkinDate.setDate(checkinDate.getDate() + 1);
+            const minCheckout = checkinDate.toISOString().split('T')[0];
+            document.getElementById('checkout').setAttribute('min', minCheckout);
+        });
+    </script>
+</body>
+</html>
